@@ -276,6 +276,13 @@ public class QwenHostedHarnessConnector implements HarnessConnector {
     }
 
     @Override
+    public Map<String, Object> runChannelOperation(String tenantId,
+            String sessionId, Map<String, Object> body) {
+        return client().runChannelOperation(
+                attachment(tenantId, sessionId, true), body);
+    }
+
+    @Override
     public String closeSession(String tenantId, String sessionId) {
         attachments.remove(new AttachmentKey(tenantId, sessionId));
         pendingRecovery.remove(new AttachmentKey(tenantId, sessionId));
